@@ -1,6 +1,8 @@
 #!/usr/bin/pup
 # Install a specific version of flask (2.1.0)
-package {'flask':
-	ensure	=> '2.1.0',
-	provider => 'pip'
+exec { 'install_flask':
+  command => '/usr/bin/pip3 install flask==2.1.0',
+  unless  => '/usr/bin/pip3 freeze | grep flask==2.1.0',
+  path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
 }
+
